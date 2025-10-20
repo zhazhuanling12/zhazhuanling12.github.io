@@ -3,8 +3,12 @@ description: 记录工程与认知
 theme: minima
 timezone: Asia/Beijing
 plugins:
+  - jekyll-paginate
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-last-modified-at
+paginate: 10
+paginate_path: "/page:num/"
 # GitHub Pages 会自动启用安全的 Jekyll 版本，无需本地 Ruby
 permalink: /:categories/:year/:month/:day/:title/
+excerpt_separator: "<!--more-->"
