@@ -1,8 +1,10 @@
 title: 我的博客
 description: 记录工程与认知
 theme: minima
+timezone: Asia/Beijing
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-last-modified-at
 # GitHub Pages 会自动启用安全的 Jekyll 版本，无需本地 Ruby
 permalink: /:categories/:year/:month/:day/:title/
