@@ -1,23 +1,28 @@
 ---
 layout: default
 ---
+{% assign ui = site.data.ui %}
+{% assign label_published = ui.label_published | default: "发布于" %}
+{% assign label_updated = ui.label_updated | default: "更新于" %}
+
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
-      发布于
+      {{ label_published }}
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {{ page.date | date: "%Y-%m-%d %H:%M" }}
       </time>
       {% assign upd = page.updated | default: page.last_modified_at %}
       {% if upd and upd != page.date %}
-        · 更新于
+        · {{ label_updated }}
         <time class="dt-updated" datetime="{{ upd | date_to_xmlschema }}" itemprop="dateModified">
           {{ upd | date: "%Y-%m-%d %H:%M" }}
         </time>
       {% endif %}
     </p>
   </header>
+
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>
