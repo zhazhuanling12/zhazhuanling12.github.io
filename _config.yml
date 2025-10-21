@@ -4,3 +4,5 @@ collections:
     permalink: /docs/:name/
 timezone: Asia/Beijing
 theme: minima
+plugins:
+  - jekyll-feed
