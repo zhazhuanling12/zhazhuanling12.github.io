@@ -2,5 +2,5 @@ collections:
   docs:
     output: true
     permalink: /docs/:name/
-timezone: Asia/Tokyo
+timezone: Asia/Beijing
 theme: minima
