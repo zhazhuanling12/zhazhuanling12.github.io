@@ -2,12 +2,98 @@
 layout: default
 title: 首页
 ---
-<ul>
+
+<div class="home-hero">
+  <h1>📚 文档与笔记</h1>
+  <p>沉淀可复用的工程知识。支持“发布于 / 更新于”、标签、搜索与暗色模式。</p>
+</div>
+
+<div class="home-controls">
+  <div class="home-search">
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <input id="q" type="search" placeholder="搜索标题或标签…" />
+  </div>
+  <div class="tag-cloud">
+    {% assign all_tags = site.tags | sort %}
+    {% for t in all_tags %}
+      <span class="tag" data-tag="{{ t[0] | downcase }}">{{ t[0] }}</span>
+    {% endfor %}
+  </div>
+</div>
+
+<section class="grid" id="cards">
   {% assign posts = site.posts | sort: "date" | reverse %}
   {% for post in posts %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      <small>· {{ post.date | date: "%Y-%m-%d" }}</small>
-    </li>
+    {% assign upd = post.updated | default: post.last_modified_at %}
+    <article class="card h-entry"
+      itemscope itemtype="http://schema.org/BlogPosting"
+      data-title="{{ post.title | downcase | escape }}"
+      data-tags="{% if post.tags %}{{ post.tags | join: ' ' | downcase | escape }}{% endif %}"
+    >
+      <h2 class="p-name" itemprop="headline">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h2>
+      <div class="meta">
+        发布于 <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%Y-%m-%d" }}</time>
+        {% if upd and upd != post.date %}
+          · 更新于 <time datetime="{{ upd | date_to_xmlschema }}" itemprop="dateModified">{{ upd | date: "%Y-%m-%d" }}</time>
+        {% endif %}
+      </div>
+      <p class="excerpt" itemprop="description">
+        {%- if post.excerpt -%}
+          {{ post.excerpt | strip_html | strip_newlines | truncate: 140 }}
+        {%- else -%}
+          {{ post.content | strip_html | strip_newlines | truncate: 140 }}
+        {%- endif -%}
+      </p>
+      {% if post.tags and post.tags.size > 0 %}
+        <div class="tags">
+          {% for t in post.tags %}<span class="tag" data-tag="{{ t | downcase }}">{{ t }}</span>{% endfor %}
+        </div>
+      {% endif %}
+    </article>
   {% endfor %}
-</ul>
+</section>
+
+<script>
+(function(){
+  const q = document.getElementById('q');
+  const cards = Array.from(document.querySelectorAll('#cards .card'));
+  const cloud = document.querySelector('.tag-cloud');
+  const tags = Array.from(document.querySelectorAll('.tag-cloud .tag'));
+  let activeTag = null;
+
+  function applyFilter(){
+    const term = (q.value || '').trim().toLowerCase();
+    cards.forEach(c => {
+      const inTitle = c.dataset.title.includes(term);
+      const inTags = (c.dataset.tags || '').includes(term);
+      const tagMatch = !activeTag || (c.dataset.tags || '').split(' ').includes(activeTag);
+      c.style.display = ((term ? (inTitle || inTags) : true) && tagMatch) ? '' : 'none';
+    });
+  }
+
+  q.addEventListener('input', applyFilter);
+  tags.forEach(t => t.addEventListener('click', () => {
+    if(activeTag === t.dataset.tag){
+      activeTag = null; t.classList.remove('active');
+    }else{
+      tags.forEach(x => x.classList.remove('active'));
+      activeTag = t.dataset.tag; t.classList.add('active');
+    }
+    applyFilter();
+  }));
+
+  // clicking a tag inside a card syncs with cloud
+  document.getElementById('cards').addEventListener('click', (e) => {
+    const t = e.target.closest('.tag'); if(!t) return;
+    const name = t.dataset.tag;
+    const inCloud = tags.find(x => x.dataset.tag === name);
+    tags.forEach(x => x.classList.remove('active'));
+    if(inCloud){ inCloud.classList.add('active'); activeTag = name; }
+    applyFilter();
+  });
+})();
+</script>
