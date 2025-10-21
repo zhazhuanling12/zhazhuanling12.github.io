@@ -3,8 +3,8 @@ layout: default
 title: 首页
 ---
 {% assign ui = site.data.ui %}
-{% assign home_title = ui.home_title | default: "📚 文档与笔记" %}
-{% assign home_subtitle = ui.home_subtitle | default: "沉淀可复用的工程知识。支持“发布于 / 更新于”、标签、搜索与暗色。" %}
+<!-- {% assign home_title = ui.home_title | default: "📚 文档与笔记" %} -->
+<!-- {% assign home_subtitle = ui.home_subtitle | default: "沉淀可复用的工程知识。支持“发布于 / 更新于”、标签、搜索与暗色。" %} -->
 {% assign search_placeholder = ui.search_placeholder | default: "搜索标题或标签…" %}
 {% assign label_published = ui.label_published | default: "发布于" %}
 {% assign label_updated = ui.label_updated | default: "更新于" %}
@@ -29,40 +29,22 @@ title: 首页
   </div>
 </div>
 
-<section class="grid" id="cards">
+<section id="post-list">
   {% assign posts = site.posts | sort: "date" | reverse %}
   {% for post in posts %}
     {% assign upd = post.updated | default: post.last_modified_at %}
-    <article class="card h-entry"
-      itemscope itemtype="http://schema.org/BlogPosting"
-      data-title="{{ post.title | downcase | escape }}"
-      data-tags="{% if post.tags %}{{ post.tags | join: ' ' | downcase | escape }}{% endif %}"
-    >
-      <h2 class="p-name" itemprop="headline">
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      </h2>
-      <div class="meta">
-        {{ label_published }}
-        <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%Y-%m-%d" }}</time>
+    <div class="post-line">
+      <a href="{{ post.url | relative_url }}" class="title">{{ post.title }}</a>
+      <span class="meta">
+        发布于 {{ post.date | date: "%Y-%m-%d" }}
         {% if upd and upd != post.date %}
-          · {{ label_updated }} <time datetime="{{ upd | date_to_xmlschema }}" itemprop="dateModified">{{ upd | date: "%Y-%m-%d" }}</time>
+          · 更新于 {{ upd | date: "%Y-%m-%d" }}
         {% endif %}
-      </div>
-      <p class="excerpt" itemprop="description">
-        {%- if post.excerpt -%}
-          {{ post.excerpt | strip_html | strip_newlines | truncate: 140 }}
-        {%- else -%}
-          {{ post.content | strip_html | strip_newlines | truncate: 140 }}
-        {%- endif -%}
-      </p>
-      {% if post.tags and post.tags.size > 0 %}
-        <div class="tags">
-          {% for t in post.tags %}<span class="tag" data-tag="{{ t | downcase }}">{{ t }}</span>{% endfor %}
-        </div>
-      {% endif %}
-    </article>
+      </span>
+    </div>
   {% endfor %}
 </section>
+
 
 <script>
 (function(){

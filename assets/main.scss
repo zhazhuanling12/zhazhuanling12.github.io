@@ -89,3 +89,29 @@ a:hover{text-decoration:underline}
   .tag{ color:#d1d5db }
   .card .excerpt{ color:#d1d5db }
 }
+
+#post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+.post-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem 0;
+}
+.post-line .title {
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+}
+.post-line .title:hover {
+  color: var(--accent);
+}
+.post-line .meta {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
