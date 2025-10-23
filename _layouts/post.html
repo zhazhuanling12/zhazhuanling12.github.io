@@ -5,6 +5,13 @@ layout: default
 <article class="k-post">
   <h1 class="k-post-title">{{ page.title | escape }}</h1>
   <p class="k-post-meta">{{ page.date | date: df }}</p>
+  {% if page.tags.size > 0 %}
+  <div class="k-tags">
+    {% for tag in page.tags %}
+      <span class="k-tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
   <div class="k-post-body">
     {{ content }}
   </div>

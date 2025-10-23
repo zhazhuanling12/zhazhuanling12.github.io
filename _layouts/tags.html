@@ -1,0 +1,34 @@
+---
+layout: default
+---
+{% assign df = site.data.ui.date_format | default: "%b %-d, %Y" %}
+
+<div class="k-tags-page">
+  <h1 class="k-tags-title">标签: {{ page.tag }}</h1>
+  <div class="k-tags-meta">
+    <p>共 {{ page.posts.size }} 篇文章</p>
+  </div>
+  
+  <section class="k-list">
+    {% for post in page.posts %}
+      <article class="k-row">
+        <div class="k-date">{{ post.date | date: df }}</div>
+        <div class="k-maincol">
+          <h2 class="k-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          <p class="k-excerpt">
+            {%- if post.excerpt -%}
+              {{ post.excerpt | strip_html | strip_newlines | truncate: 180 }}
+            {%- else -%}
+              {{ post.content | strip_html | strip_newlines | truncate: 180 }}
+            {%- endif -%}
+          </p>
+          <div class="k-tags">
+            {% for tag in post.tags %}
+              <span class="k-tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </section>
+</div>

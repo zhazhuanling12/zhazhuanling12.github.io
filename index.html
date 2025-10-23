@@ -18,6 +18,13 @@ title: 首页
             {{ post.content | strip_html | strip_newlines | truncate: 180 }}
           {%- endif -%}
         </p>
+        {% if post.tags.size > 0 %}
+        <div class="k-tags">
+          {% for tag in post.tags %}
+            <span class="k-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
       </div>
     </article>
   {% endfor %}

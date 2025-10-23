@@ -1,5 +1,6 @@
 ---
 ---
+
 @import "minima";
 
 :root{
@@ -11,6 +12,7 @@
   --border:#e5e7eb;
   --wrap: 920px;
   --date-col: 150px;
+  --spacing: 24px;         /* 统一间距变量 */
 }
 
 html{font-size:var(--fs)}
@@ -22,7 +24,7 @@ body{
   color: var(--text);
 }
 
-.k-wrap{max-width: var(--wrap); margin: 0 auto; padding: 0 16px}
+.k-wrap{max-width: var(--wrap); margin: 0 auto; padding: 0 var(--spacing)}
 
 .k-header{
   position: sticky; top: 0; z-index: 10;
@@ -36,10 +38,10 @@ body{
 .k-link{color: var(--text); text-decoration:none}
 .k-link:hover{color: var(--link)}
 
-.k-main{padding: 18px 0 40px}
+.k-main{padding: calc(var(--spacing) * 1.5) 0 calc(var(--spacing) * 2.5)}
 
-.k-list{display:block; margin-top: 12px}
-.k-row{display:flex; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--border)}
+.k-list{display:block; margin-top: calc(var(--spacing) * 0.5)}
+.k-row{display:flex; gap: var(--spacing); padding: calc(var(--spacing) * 0.75) 0; border-bottom: 1px solid var(--border)}
 .k-date{flex: 0 0 var(--date-col); color: var(--muted)}
 .k-maincol{flex: 1 1 auto}
 .k-title{font-size: 20px; margin: 0 0 6px; line-height: 1.35}
@@ -51,12 +53,52 @@ body{
 .k-post .k-post-meta{color: var(--muted); margin: 0 0 14px}
 .k-post .k-post-body{font-size: 17px}
 
-.k-footer{border-top:1px solid var(--border); padding: 16px 0; margin-top: 40px}
+/* 标签样式 */
+.k-tags{display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px}
+.k-tag{
+  display: inline-block;
+  padding: 4px 8px;
+  background: #f3f4f6;
+  color: var(--muted);
+  font-size: 13px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.k-tag:hover{background: var(--link); color: white}
+
+/* 标签云页面 */
+.k-tags-cloud{margin-top: calc(var(--spacing) * 0.5)}
+.k-tags-title{font-size: 28px; margin: 0 0 calc(var(--spacing) * 0.5); line-height: 1.25; letter-spacing: -0.01em}
+.k-tags-meta{color: var(--muted); margin: 0 0 calc(var(--spacing) * 0.75)}
+.k-tags-list{display: flex; flex-wrap: wrap; gap: 12px; margin-top: calc(var(--spacing) * 0.75)}
+.k-tag-link{
+  display: inline-block;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+.k-tag-link:hover{
+  background: var(--link);
+  color: white;
+  border-color: var(--link);
+}
+
+.k-footer{border-top:1px solid var(--border); padding: var(--spacing) 0; margin-top: calc(var(--spacing) * 2.5)}
 .k-foot-txt{margin:0; color: var(--muted)}
 
 /* 响应式：窄屏时把日期放到标题上方 */
 @media (max-width: 720px){
-  :root{ --date-col: 110px; }
+  :root{ 
+    --date-col: 110px; 
+    --spacing: 16px;  /* 移动端减少间距 */
+  }
   .k-row{flex-direction: column; gap: 6px}
   .k-date{order: 0}
+  .k-tags{justify-content: flex-start}
+  .k-tags-list{gap: 8px}
 }

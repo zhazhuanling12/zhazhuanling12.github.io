@@ -5,6 +5,8 @@ show_rss: false            # 显示左侧 RSS 图标；若要生效请开启 jek
 # rss_url: "/feed.xml"
 
 nav:
+  - title: "Tags"
+    url: "/tags/"
   - title: "About"
     url: "/about/"
 
