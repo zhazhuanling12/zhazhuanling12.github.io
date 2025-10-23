@@ -1,0 +1,39 @@
+{% assign c = site.data.ui.comments %}
+{% if c.enabled %}
+  <section id="comments" class="k-comments">
+    {% if c.provider == "disqus" and c.shortname %}
+      <div id="disqus_thread"></div>
+      <script>
+      var disqus_config = function () {
+        this.page.url = '{{ page.url | absolute_url }}';
+        this.page.identifier = '{{ page.id | default: page.url }}';
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://{{ c.shortname }}.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+      </script>
+      <noscript>请开启 JavaScript 以查看 <a href="https://disqus.com/?ref_noscript" rel="nofollow">Disqus 评论</a>。</noscript>
+    {% elsif c.provider == "giscus" and c.repo and c.repo_id and c.category and c.category_id %}
+      <script src="https://giscus.app/client.js"
+        data-repo="{{ c.repo }}"
+        data-repo-id="{{ c.repo_id }}"
+        data-category="{{ c.category }}"
+        data-category-id="{{ c.category_id }}"
+        data-mapping="{{ c.mapping | default: 'pathname' }}"
+        data-reactions-enabled="{{ c.reactions_enabled | default: '1' }}"
+        data-emit-metadata="{{ c.emit_metadata | default: '0' }}"
+        data-input-position="{{ c.input_position | default: 'top' }}"
+        data-theme="{{ c.theme | default: 'preferred_color_scheme' }}"
+        data-lang="{{ c.lang | default: 'zh-CN' }}"
+        crossorigin="anonymous"
+        async>
+      </script>
+      <noscript>请开启 JavaScript 以查看 Giscus 评论。</noscript>
+    {% else %}
+      <p class="k-comments-note">评论系统未配置：请在 <code>_data/ui.yml</code> 中设置 <code>comments</code>。</p>
+    {% endif %}
+  </section>
+{% endif %}

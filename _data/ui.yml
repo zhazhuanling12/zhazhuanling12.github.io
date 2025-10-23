@@ -1,8 +1,27 @@
-home_title: "📂 文档目录"
-home_subtitle: "左侧按 _posts 目录路径聚合，右侧按行展示。支持搜索与更新时间显示。"
-search_placeholder: "搜索标题或标签…"
-label_published: "发布于"
-label_updated: "更新于"
-label_catalog: "目录"
-label_all: "全部"
-label_uncategorized: "未分类"
+# 文案与选项
+site_name: "Andrej-ish Blog"
+date_format: "%b %-d, %Y"  # 英文月份，如 Mar 14, 2022
+show_rss: false            # 显示左侧 RSS 图标；若要生效请开启 jekyll-feed 插件
+rss_url: "/feed.xml"
+
+nav:
+  - title: "About"
+    url: "/about/"
+
+# 评论系统开关（任选其一，其他留空即可）
+comments:
+  enabled: true
+  provider: "disqus"       # 可选：disqus 或 giscus
+  # --- 若使用 Disqus，填你的 shortname，例如 "your-shortname" ---
+  shortname: "your-shortname"
+  # --- 若使用 Giscus，填写以下字段（从 https://giscus.app 获取） ---
+  repo: ""           # e.g. username/repo
+  repo_id: ""        # e.g. R_kgDOExample
+  category: ""       # e.g. Announcements
+  category_id: ""    # e.g. DIC_kwDOExample4CSD
+  mapping: "pathname"
+  reactions_enabled: "1"
+  emit_metadata: "0"
+  input_position: "top"
+  theme: "preferred_color_scheme"
+  lang: "zh-CN"

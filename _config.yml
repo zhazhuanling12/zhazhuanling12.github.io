@@ -1,8 +1,9 @@
-title: 我的工程笔记
-description: 按目录组织的个人博客（GitHub Pages + Jekyll）
+title: My Blog
+description: Minimal, clean, content-first blog
 theme: minima
 timezone: Asia/Tokyo
 permalink: /:categories/:year/:month/:day/:title/
-plugins:
-  - jekyll-last-modified-at
+# 若要启用真正的 RSS，请在 plugins 中加入 jekyll-feed 并把 _data/ui.yml 的 show_rss 设为 true
+# plugins:
+#   - jekyll-feed
 excerpt_separator: "<!--more-->"

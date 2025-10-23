@@ -1,7 +1,7 @@
 ---
 layout: page
-title: 关于
+title: About
 permalink: /about/
 ---
 
-语音方向从业者，目前的研究方向是语音到语音大模型
+这里写你的简介、研究方向、联系方式等。

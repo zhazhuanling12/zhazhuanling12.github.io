@@ -1,22 +1,62 @@
 ---
 ---
 @import "minima";
-:root{--bg:#f2f3f5;--card:#fff;--border:#d9d9de;--text:#151718;--muted:#667085;--accent:#0f766e;--radius:14px;--fs:16px;--lh:1.75}
-html{font-size:var(--fs)}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;line-height:var(--lh);background:var(--bg);color:var(--text)}
-a{color:var(--accent);text-underline-offset:2px}a:hover{text-decoration:underline}
-.home-hero{margin:1.2rem 0 1rem;padding:1rem 1.25rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--card)}
-.home-hero h1{margin:.2rem 0 .3rem;font-size:clamp(26px,3.6vw,38px);letter-spacing:-.02em}.home-hero p{margin:0;color:#374151}
-.layout-2col{display:grid;grid-template-columns:260px 1fr;gap:16px}
-@media(max-width:860px){.layout-2col{grid-template-columns:1fr}.sidebar{order:2}.main{order:1}}
-.sidebar{position:sticky;top:1rem;align-self:start;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px}
-.sidebar-head{font-weight:600;margin-bottom:.5rem}.cats{list-style:none;margin:0;padding:0;max-height:60vh;overflow:auto}
-.cat{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;border-radius:8px;cursor:pointer}.cat:hover{background:#0001}.cat.active{background:#0f766e14;border:1px solid #0f766e55}
-.cat .count{color:var(--muted);font-size:.85rem}
-.main .toolbar{display:flex;justify-content:flex-end;margin-bottom:.5rem}
-.home-search{display:flex;align-items:center;gap:.5rem;border:1px solid var(--border);border-radius:10px;padding:.5rem .75rem;background:var(--card)}
-.home-search input{border:none;outline:none;background:transparent;font:inherit;color:var(--text)}
-#post-list{display:flex;flex-direction:column;margin:.5rem 0}
-.post-line{display:flex;flex-wrap:wrap;justify-content:space-between;border-bottom:1px solid var(--border);padding:.6rem .25rem}
-.post-line .title{font-weight:500;color:var(--text);text-decoration:none}.post-line .title:hover{color:var(--accent)}
-.post-line .meta{font-size:.9rem;color:var(--muted)}.post-line .cat-label{font-style:normal;color:#374151;margin-right:.4rem}
-@media(prefers-color-scheme:dark){:root{--bg:#0f1113;--card:#13171a;--border:#1f2937;--text:#e5e7eb;--muted:#9aa4b2;--accent:#60a5fa}.cat:hover{background:#fff1}.post-line .cat-label{color:#d1d5db}}
+
+:root{
+  --fs: 16px;
+  --lh: 1.7;
+  --text: #222;
+  --muted:#6b7280;
+  --link:#1a73e8;          /* 谷歌蓝，接近截图风格 */
+  --border:#e5e7eb;
+  --wrap: 920px;
+  --date-col: 150px;
+}
+
+html{font-size:var(--fs)}
+body{
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
+               "PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",
+               "Helvetica Neue",Arial,sans-serif;
+  line-height: var(--lh);
+  color: var(--text);
+}
+
+.k-wrap{max-width: var(--wrap); margin: 0 auto; padding: 0 16px}
+
+.k-header{
+  position: sticky; top: 0; z-index: 10;
+  background: #fff; border-bottom: 1px solid var(--border);
+}
+.k-nav{display:flex; align-items:center; justify-content:space-between; min-height:56px}
+.k-left{display:flex; align-items:center; gap:10px}
+.k-rss{display:inline-flex; align-items:center}
+.k-brand{font-weight:600; color: var(--text); text-decoration: none; letter-spacing: -0.01em}
+.k-right{display:flex; gap: 20px}
+.k-link{color: var(--text); text-decoration:none}
+.k-link:hover{color: var(--link)}
+
+.k-main{padding: 18px 0 40px}
+
+.k-list{display:block; margin-top: 12px}
+.k-row{display:flex; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--border)}
+.k-date{flex: 0 0 var(--date-col); color: var(--muted)}
+.k-maincol{flex: 1 1 auto}
+.k-title{font-size: 20px; margin: 0 0 6px; line-height: 1.35}
+.k-title a{color: var(--link); text-decoration:none}
+.k-title a:hover{text-decoration: underline}
+.k-excerpt{margin:0; color:#444}
+
+.k-post .k-post-title{font-size: 28px; margin: 10px 0 6px; line-height: 1.25; letter-spacing: -0.01em}
+.k-post .k-post-meta{color: var(--muted); margin: 0 0 14px}
+.k-post .k-post-body{font-size: 17px}
+
+.k-footer{border-top:1px solid var(--border); padding: 16px 0; margin-top: 40px}
+.k-foot-txt{margin:0; color: var(--muted)}
+
+/* 响应式：窄屏时把日期放到标题上方 */
+@media (max-width: 720px){
+  :root{ --date-col: 110px; }
+  .k-row{flex-direction: column; gap: 6px}
+  .k-date{order: 0}
+}
