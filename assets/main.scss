@@ -1,62 +1,27 @@
----
----
-@import "minima";
-
+/* ===== Gutters & Measure（优雅留白 + 版心） ===== */
 :root{
-  --fs: 16px;
-  --lh: 1.7;
-  --text: #222;
-  --muted:#6b7280;
-  --link:#1a73e8;          /* 谷歌蓝，接近截图风格 */
-  --border:#e5e7eb;
-  --wrap: 920px;
-  --date-col: 150px;
+  --wrap: 960px;                     /* 版心最大宽度，常见 880–1000px */
+  --gutter: clamp(16px, 4vw, 48px);  /* 左右安全边距：随屏宽自适应 */
+  --date-col: 150px;                 /* 左列日期栏宽度 */
 }
 
-html{font-size:var(--fs)}
-body{
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
-               "PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",
-               "Helvetica Neue",Arial,sans-serif;
-  line-height: var(--lh);
-  color: var(--text);
+/* 全站容器：居中 + 两侧留白 */
+.k-wrap{
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
-.k-wrap{max-width: var(--wrap); margin: 0 auto; padding: 0 16px}
+/* 列表行的间距随屏宽柔性变化 */
+.k-list .k-row{ gap: clamp(16px, 3vw, 28px); }
+.k-date{ flex: 0 0 var(--date-col); color: var(--muted); }
 
-.k-header{
-  position: sticky; top: 0; z-index: 10;
-  background: #fff; border-bottom: 1px solid var(--border);
-}
-.k-nav{display:flex; align-items:center; justify-content:space-between; min-height:56px}
-.k-left{display:flex; align-items:center; gap:10px}
-.k-rss{display:inline-flex; align-items:center}
-.k-brand{font-weight:600; color: var(--text); text-decoration: none; letter-spacing: -0.01em}
-.k-right{display:flex; gap: 20px}
-.k-link{color: var(--text); text-decoration:none}
-.k-link:hover{color: var(--link)}
+/* 文章正文的理想行宽（60–72 字符） */
+.k-post .k-post-body{ max-width: 72ch; }
 
-.k-main{padding: 18px 0 40px}
-
-.k-list{display:block; margin-top: 12px}
-.k-row{display:flex; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--border)}
-.k-date{flex: 0 0 var(--date-col); color: var(--muted)}
-.k-maincol{flex: 1 1 auto}
-.k-title{font-size: 20px; margin: 0 0 6px; line-height: 1.35}
-.k-title a{color: var(--link); text-decoration:none}
-.k-title a:hover{text-decoration: underline}
-.k-excerpt{margin:0; color:#444}
-
-.k-post .k-post-title{font-size: 28px; margin: 10px 0 6px; line-height: 1.25; letter-spacing: -0.01em}
-.k-post .k-post-meta{color: var(--muted); margin: 0 0 14px}
-.k-post .k-post-body{font-size: 17px}
-
-.k-footer{border-top:1px solid var(--border); padding: 16px 0; margin-top: 40px}
-.k-foot-txt{margin:0; color: var(--muted)}
-
-/* 响应式：窄屏时把日期放到标题上方 */
+/* 窄屏：日期上移，改为单列 */
 @media (max-width: 720px){
   :root{ --date-col: 110px; }
-  .k-row{flex-direction: column; gap: 6px}
-  .k-date{order: 0}
+  .k-row{ flex-direction: column; gap: 6px; }
+  .k-wrap{ padding-inline: 16px; }
 }
