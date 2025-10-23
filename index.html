@@ -8,12 +8,16 @@ title: 首页
 <div class="k-tag-filter">
   <div class="k-filter-controls">
     <button class="k-filter-btn active" data-tag="all">全部</button>
-    {% assign all_tags = site.tags | sort %}
-    {% for tag in all_tags %}
-      {% assign tag_name = tag[0] %}
-      {% assign tag_posts = tag[1] %}
-      <button class="k-filter-btn" data-tag="{{ tag_name }}">{{ tag_name }} ({{ tag_posts.size }})</button>
-    {% endfor %}
+    <button class="k-filter-btn" data-tag="AI">AI (1)</button>
+    <button class="k-filter-btn" data-tag="Agent">Agent (1)</button>
+    <button class="k-filter-btn" data-tag="上下文工程">上下文工程 (1)</button>
+    <button class="k-filter-btn" data-tag="技术">技术 (1)</button>
+    <button class="k-filter-btn" data-tag="深度学习">深度学习 (2)</button>
+    <button class="k-filter-btn" data-tag="分布式训练">分布式训练 (1)</button>
+    <button class="k-filter-btn" data-tag="PyTorch">PyTorch (2)</button>
+    <button class="k-filter-btn" data-tag="多机多卡">多机多卡 (1)</button>
+    <button class="k-filter-btn" data-tag="模型保存">模型保存 (1)</button>
+    <button class="k-filter-btn" data-tag="格式转换">格式转换 (1)</button>
   </div>
 </div>
 

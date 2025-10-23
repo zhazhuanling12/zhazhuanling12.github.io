@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const posts = document.querySelectorAll('.k-row[data-tags]');
   
   filterButtons.forEach(button => {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
       const selectedTag = this.getAttribute('data-tag');
       
       // 更新按钮状态
@@ -13,9 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // 筛选文章
       posts.forEach(post => {
-        const postTags = post.getAttribute('data-tags').split(',');
+        const postTags = post.getAttribute('data-tags');
         
-        if (selectedTag === 'all' || postTags.includes(selectedTag)) {
+        if (!postTags || postTags.trim() === '') {
+          post.style.display = 'none';
+          return;
+        }
+        
+        const tagArray = postTags.split(',').map(tag => tag.trim());
+        
+        if (selectedTag === 'all' || tagArray.includes(selectedTag)) {
           post.style.display = 'flex';
         } else {
           post.style.display = 'none';
@@ -23,10 +31,13 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       
       // 平滑滚动到文章列表顶部
-      document.getElementById('posts-list').scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+      const postsList = document.getElementById('posts-list');
+      if (postsList) {
+        postsList.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     });
   });
   

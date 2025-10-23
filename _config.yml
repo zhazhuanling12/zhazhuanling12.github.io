@@ -16,3 +16,6 @@ collections:
   tags:
     output: true
     permalink: /tags/:name/
+
+# 确保标签被正确处理
+include: ['_pages']
