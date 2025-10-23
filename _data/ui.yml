@@ -1,6 +1,8 @@
-# 可自定义的文案（不写则使用默认）
-home_title: "📚 文档与笔记"
-home_subtitle: "沉淀可复用的工程知识。支持“发布于 / 更新于”、标签、搜索与暗色。"
+# 可自定义首页与元信息文案
+home_title: "📂 文档目录"
+home_subtitle: "按目录浏览与筛选，左侧为目录，右侧为文档列表。"
 search_placeholder: "搜索标题或标签…"
 label_published: "发布于"
 label_updated: "更新于"
+label_catalog: "目录"
+label_all: "全部"
