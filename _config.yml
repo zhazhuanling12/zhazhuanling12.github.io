@@ -1,13 +1,8 @@
-title: 我的博客
-description: 记录算法、工程与认知
-header_pages:
-  - about.md
-collections:
-  docs:
-    output: true
-    permalink: /docs/:name/
-timezone: Asia/Beijing
+title: 我的工程笔记
+description: 按目录组织的个人博客（GitHub Pages + Jekyll）
 theme: minima
+timezone: Asia/Tokyo
+permalink: /:categories/:year/:month/:day/:title/
 plugins:
-  - jekyll-feed
+  - jekyll-last-modified-at
 excerpt_separator: "<!--more-->"

@@ -13,7 +13,7 @@ layout: default
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {{ page.date | date: "%Y-%m-%d %H:%M" }}
       </time>
-      {% assign upd = page.updated | default: page.last_modified_at %}
+      {% assign upd = page.last_modified_at | default: page.updated | default: page.date %}
       {% if upd and upd != page.date %}
         · {{ label_updated }}
         <time class="dt-updated" datetime="{{ upd | date_to_xmlschema }}" itemprop="dateModified">
@@ -22,7 +22,6 @@ layout: default
       {% endif %}
     </p>
   </header>
-
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>

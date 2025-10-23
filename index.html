@@ -4,12 +4,13 @@ title: 首页
 ---
 {% assign ui = site.data.ui %}
 {% assign home_title = ui.home_title | default: "📂 文档目录" %}
-{% assign home_subtitle = ui.home_subtitle | default: "按目录浏览与筛选，左侧为目录，右侧为文档列表。" %}
+{% assign home_subtitle = ui.home_subtitle | default: "左侧按 _posts 目录路径聚合，右侧按行展示。支持搜索与更新时间显示。" %}
 {% assign search_placeholder = ui.search_placeholder | default: "搜索标题或标签…" %}
 {% assign label_published = ui.label_published | default: "发布于" %}
 {% assign label_updated = ui.label_updated | default: "更新于" %}
 {% assign label_catalog = ui.label_catalog | default: "目录" %}
 {% assign label_all = ui.label_all | default: "全部" %}
+{% assign label_uncategorized = ui.label_uncategorized | default: "未分类" %}
 
 <div class="home-hero">
   <h1>{{ home_title }}</h1>
@@ -20,11 +21,18 @@ title: 首页
   <aside class="sidebar">
     <div class="sidebar-head">{{ label_catalog }}</div>
     <ul class="cats">
-      <li class="cat active" data-cat="__all">{{ label_all }} <span class="count">{{ site.posts | size }}</span></li>
-      {% assign pairs = site.categories | sort %}
-      {% for cat in pairs %}
-        <li class="cat" data-cat="{{ cat[0] | downcase }}">{{ cat[0] }} <span class="count">{{ cat[1].size }}</span></li>
-      {% endfor %}
+      <li class="cat active" data-path="__all">{{ label_all }} <span class="count">{{ site.posts | size }}</span></li>
+      {%- assign keys = "" | split: "" -%}
+      {%- for p in site.posts -%}
+        {%- assign key = p.categories | join: "/" -%}
+        {%- assign keys = keys | push: key -%}
+      {%- endfor -%}
+      {%- assign paths = keys | uniq | sort -%}
+      {%- for path in paths -%}
+        {%- assign count = 0 -%}
+        {%- for p in site.posts -%}{%- if p.categories | join: "/" == path -%}{%- assign count = count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+        <li class="cat" data-path="{{ path | downcase | escape }}">{{ path | default: label_uncategorized }} <span class="count">{{ count }}</span></li>
+      {%- endfor -%}
     </ul>
   </aside>
 
@@ -41,16 +49,14 @@ title: 首页
     <section id="post-list">
       {% assign posts = site.posts | sort: "date" | reverse %}
       {% for post in posts %}
-        {% assign upd = post.updated | default: post.last_modified_at %}
-        {% assign cat_label = post.categories | join: '/' %}
-        <div class="post-line" data-cats="{% for c in post.categories %}{{ c | downcase }} {% endfor %}" data-title="{{ post.title | downcase | escape }}">
+        {% assign path = post.categories | join: "/" %}
+        {% assign upd = post.last_modified_at | default: post.updated | default: post.date %}
+        <div class="post-line" data-title="{{ post.title | downcase | escape }}" data-path="{{ path | downcase | escape }}">
           <a href="{{ post.url | relative_url }}" class="title">{{ post.title }}</a>
           <span class="meta">
-            {% if cat_label != "" %}<em class="cat-label">[{{ cat_label }}]</em>{% endif %}
+            {% if path != "" %}<em class="cat-label">[{{ path }}]</em>{% endif %}
             {{ label_published }} {{ post.date | date: "%Y-%m-%d" }}
-            {% if upd and upd != post.date %}
-              · {{ label_updated }} {{ upd | date: "%Y-%m-%d" }}
-            {% endif %}
+            {% if upd and upd != post.date %} · {{ label_updated }} {{ upd | date: "%Y-%m-%d" }}{% endif %}
           </span>
         </div>
       {% endfor %}
@@ -63,23 +69,20 @@ title: 首页
   const q = document.getElementById('q');
   const lines = Array.from(document.querySelectorAll('#post-list .post-line'));
   const cats = Array.from(document.querySelectorAll('.sidebar .cat'));
-  let activeCat = "__all";
-
+  let activePath = "__all";
   function applyFilter(){
-    const term = (q.value || '').trim().toLowerCase();
+    const term = (q?.value || '').trim().toLowerCase();
     lines.forEach(li => {
       const inTitle = li.dataset.title.includes(term);
-      const inCat = activeCat === "__all" || (li.dataset.cats || '').split(' ').includes(activeCat);
-      li.style.display = ((term ? inTitle : true) && inCat) ? '' : 'none';
+      const pathMatch = activePath === "__all" || (li.dataset.path === activePath);
+      li.style.display = ((term ? inTitle : true) && pathMatch) ? '' : 'none';
     });
   }
-
   q && q.addEventListener('input', applyFilter);
-
   cats.forEach(c => c.addEventListener('click', () => {
     cats.forEach(x => x.classList.remove('active'));
     c.classList.add('active');
-    activeCat = c.dataset.cat;
+    activePath = c.dataset.path;
     applyFilter();
   }));
 })();
