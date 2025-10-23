@@ -7,3 +7,12 @@ permalink: /:categories/:year/:month/:day/:title/
 # plugins:
 #   - jekyll-feed
 excerpt_separator: "<!--more-->"
+
+# 标签目录配置
+tag_dir: tags
+
+# 启用标签和分类
+collections:
+  tags:
+    output: true
+    permalink: /tags/:name/

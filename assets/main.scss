@@ -12,7 +12,12 @@
   --border:#e5e7eb;
   --wrap: 920px;
   --date-col: 150px;
-  --spacing: 24px;         /* 统一间距变量 */
+  
+  /* 响应式间距系统 - 基于视口宽度 */
+  --spacing: clamp(16px, 2.5vw, 32px);           /* 基础间距 */
+  --spacing-sm: clamp(8px, 1.25vw, 16px);         /* 小间距 */
+  --spacing-lg: clamp(24px, 3.75vw, 48px);       /* 大间距 */
+  --spacing-xl: clamp(32px, 5vw, 64px);           /* 超大间距 */
 }
 
 html{font-size:var(--fs)}
@@ -38,10 +43,10 @@ body{
 .k-link{color: var(--text); text-decoration:none}
 .k-link:hover{color: var(--link)}
 
-.k-main{padding: calc(var(--spacing) * 1.5) 0 calc(var(--spacing) * 2.5)}
+.k-main{padding: var(--spacing-lg) 0 var(--spacing-xl)}
 
-.k-list{display:block; margin-top: calc(var(--spacing) * 0.5)}
-.k-row{display:flex; gap: var(--spacing); padding: calc(var(--spacing) * 0.75) 0; border-bottom: 1px solid var(--border)}
+.k-list{display:block; margin-top: var(--spacing-sm)}
+.k-row{display:flex; gap: var(--spacing); padding: var(--spacing) 0; border-bottom: 1px solid var(--border)}
 .k-date{flex: 0 0 var(--date-col); color: var(--muted)}
 .k-maincol{flex: 1 1 auto}
 .k-title{font-size: 20px; margin: 0 0 6px; line-height: 1.35}
@@ -68,10 +73,10 @@ body{
 .k-tag:hover{background: var(--link); color: white}
 
 /* 标签云页面 */
-.k-tags-cloud{margin-top: calc(var(--spacing) * 0.5)}
-.k-tags-title{font-size: 28px; margin: 0 0 calc(var(--spacing) * 0.5); line-height: 1.25; letter-spacing: -0.01em}
-.k-tags-meta{color: var(--muted); margin: 0 0 calc(var(--spacing) * 0.75)}
-.k-tags-list{display: flex; flex-wrap: wrap; gap: 12px; margin-top: calc(var(--spacing) * 0.75)}
+.k-tags-cloud{margin-top: var(--spacing-sm)}
+.k-tags-title{font-size: 28px; margin: 0 0 var(--spacing-sm); line-height: 1.25; letter-spacing: -0.01em}
+.k-tags-meta{color: var(--muted); margin: 0 0 var(--spacing)}
+.k-tags-list{display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing)}
 .k-tag-link{
   display: inline-block;
   padding: 8px 12px;
@@ -88,17 +93,21 @@ body{
   border-color: var(--link);
 }
 
-.k-footer{border-top:1px solid var(--border); padding: var(--spacing) 0; margin-top: calc(var(--spacing) * 2.5)}
+.k-footer{border-top:1px solid var(--border); padding: var(--spacing) 0; margin-top: var(--spacing-xl)}
 .k-foot-txt{margin:0; color: var(--muted)}
 
 /* 响应式：窄屏时把日期放到标题上方 */
 @media (max-width: 720px){
   :root{ 
     --date-col: 110px; 
-    --spacing: 16px;  /* 移动端减少间距 */
+    /* 移动端使用更小的间距比例 */
+    --spacing: clamp(12px, 2vw, 20px);
+    --spacing-sm: clamp(6px, 1vw, 12px);
+    --spacing-lg: clamp(18px, 3vw, 30px);
+    --spacing-xl: clamp(24px, 4vw, 40px);
   }
   .k-row{flex-direction: column; gap: 6px}
   .k-date{order: 0}
   .k-tags{justify-content: flex-start}
-  .k-tags-list{gap: 8px}
+  .k-tags-list{gap: var(--spacing-sm)}
 }

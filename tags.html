@@ -8,13 +8,16 @@ permalink: /tags/
   <h1 class="k-tags-title">标签云</h1>
   
   <div class="k-tags-list">
-    {% assign sorted_tags = site.tags | sort %}
-    {% for tag in sorted_tags %}
-      {% assign tag_name = tag[0] %}
-      {% assign tag_posts = tag[1] %}
-      <a href="{{ '/tags/' | append: tag_name | relative_url }}" class="k-tag-link">
-        {{ tag_name }} ({{ tag_posts.size }})
-      </a>
-    {% endfor %}
+    {% comment %} 手动列出所有标签 {% endcomment %}
+    <a href="#AI" class="k-tag-link">AI (1)</a>
+    <a href="#Agent" class="k-tag-link">Agent (1)</a>
+    <a href="#上下文工程" class="k-tag-link">上下文工程 (1)</a>
+    <a href="#技术" class="k-tag-link">技术 (1)</a>
+    <a href="#深度学习" class="k-tag-link">深度学习 (2)</a>
+    <a href="#分布式训练" class="k-tag-link">分布式训练 (1)</a>
+    <a href="#PyTorch" class="k-tag-link">PyTorch (2)</a>
+    <a href="#多机多卡" class="k-tag-link">多机多卡 (1)</a>
+    <a href="#模型保存" class="k-tag-link">模型保存 (1)</a>
+    <a href="#格式转换" class="k-tag-link">格式转换 (1)</a>
   </div>
 </div>
