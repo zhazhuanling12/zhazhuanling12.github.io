@@ -1,27 +1,26 @@
 # 文案与选项
-site_name: "Andrej-ish Blog"
+# site_name: "Andrej-ish Blog"
 date_format: "%b %-d, %Y"  # 英文月份，如 Mar 14, 2022
 show_rss: false            # 显示左侧 RSS 图标；若要生效请开启 jekyll-feed 插件
-rss_url: "/feed.xml"
+# rss_url: "/feed.xml"
 
 nav:
   - title: "About"
     url: "/about/"
 
-# 评论系统开关（任选其一，其他留空即可）
 comments:
-  enabled: true
-  provider: "disqus"       # 可选：disqus 或 giscus
-  # --- 若使用 Disqus，填你的 shortname，例如 "your-shortname" ---
-  shortname: "your-shortname"
-  # --- 若使用 Giscus，填写以下字段（从 https://giscus.app 获取） ---
-  repo: ""           # e.g. username/repo
-  repo_id: ""        # e.g. R_kgDOExample
-  category: ""       # e.g. Announcements
-  category_id: ""    # e.g. DIC_kwDOExample4CSD
-  mapping: "pathname"
-  reactions_enabled: "1"
-  emit_metadata: "0"
-  input_position: "top"
-  theme: "preferred_color_scheme"
-  lang: "zh-CN"
+  enabled: false
+
+# comments:
+#   enabled: true
+#   provider: "giscus"
+#   repo: "zhazhuanling12/blog_comments"
+#   repo_id: "R_kgDOxxxxxx"        # 从 giscus.app 复制
+#   category: "General"
+#   category_id: "DIC_kwDOxxxxxx4CSD"
+#   mapping: "pathname"
+#   reactions_enabled: "1"
+#   emit_metadata: "0"
+#   input_position: "top"
+#   theme: "preferred_color_scheme"
+#   lang: "zh-CN"
