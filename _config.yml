@@ -19,3 +19,4 @@ collections:
 
 # 确保标签被正确处理
 include: ['_pages']
+url: https://zhuanling.com        # 用自定义域时写它
