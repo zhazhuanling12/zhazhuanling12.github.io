@@ -1,9 +1,7 @@
 ---
 ---
 
-@import "minima";
-
-:root{
+:root {
   --fs: 16px;
   --lh: 1.7;
   --text: #222;
@@ -49,7 +47,7 @@ body{
 .k-row{display:flex; gap: var(--spacing); padding: var(--spacing) 0; border-bottom: 1px solid var(--border)}
 .k-date{flex: 0 0 var(--date-col); color: var(--muted)}
 .k-maincol{flex: 1 1 auto}
-.k-title{font-size: 20px; margin: 0 0 6px; line-height: 1.35}
+.k-title{font-size: 20px; margin: 0 0 6px; line-height: 1.35; display: flex; align-items: center; gap: 12px; flex-wrap: wrap}
 .k-title a{color: var(--link); text-decoration:none}
 .k-title a:hover{text-decoration: underline}
 .k-excerpt{margin:0; color:#444}
@@ -59,7 +57,7 @@ body{
 .k-post .k-post-body{font-size: 17px}
 
 /* 标签样式 */
-.k-tags{display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px}
+.k-tags{display: inline-flex; flex-wrap: wrap; gap: 8px; margin: 0}
 .k-tag{
   display: inline-block;
   padding: 4px 8px;
