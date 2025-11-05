@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-语音算法从业者，欢迎来聊AI！
+一个探索世界的小朋友
