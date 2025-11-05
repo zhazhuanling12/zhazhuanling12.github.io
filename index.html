@@ -43,13 +43,13 @@ title: 首页
       <div class="k-date">{{ post.date | date: df }}</div>
       <div class="k-maincol">
         <h2 class="k-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-        <p class="k-excerpt">
+        <!-- <p class="k-excerpt">
           {%- if post.excerpt -%}
             {{ post.excerpt | strip_html | strip_newlines | truncate: 180 }}
           {%- else -%}
             {{ post.content | strip_html | strip_newlines | truncate: 180 }}
           {%- endif -%}
-        </p>
+        </p> -->
         {% if post.tags.size > 0 %}
         <div class="k-tags">
           {% for tag in post.tags %}
