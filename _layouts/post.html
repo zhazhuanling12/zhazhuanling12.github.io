@@ -4,7 +4,14 @@ layout: default
 {% assign df = site.data.ui.date_format | default: "%b %-d, %Y" %}
 <article class="k-post">
   <h1 class="k-post-title">{{ page.title | escape }}</h1>
-  <p class="k-post-meta">{{ page.date | date: df }}</p>
+  <p class="k-post-meta">
+    <time class="k-post-date">{{ page.date | date: df }}</time>
+    {% assign last_modified = page.last_modified_at | default: page.last_modified | default: page.updated %}
+    {% if last_modified and last_modified != page.date %}
+      <span class="k-post-sep">·</span>
+      <time class="k-post-edit-date">最近更新 {{ last_modified | date: df }}</time>
+    {% endif %}
+  </p>
   {% if page.tags.size > 0 %}
   <div class="k-tags">
     {% for tag in page.tags %}

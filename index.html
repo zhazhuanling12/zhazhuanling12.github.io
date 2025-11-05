@@ -40,7 +40,6 @@ title: 首页
   {% assign posts = site.posts | sort: "date" | reverse %}
   {% for post in posts %}
     <article class="k-row" data-tags="{{ post.tags | join: ',' }}">
-      <div class="k-date">{{ post.date | date: df }}</div>
       <div class="k-maincol">
         <h2 class="k-title">
           <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
@@ -52,6 +51,14 @@ title: 首页
           </span>
           {% endif %}
         </h2>
+        <div class="k-meta">
+          <time class="k-meta-date">{{ post.date | date: df }}</time>
+          {% assign last_modified = post.last_modified_at | default: post.last_modified | default: post.updated %}
+          {% if last_modified and last_modified != post.date %}
+            <span class="k-meta-sep">·</span>
+            <time class="k-meta-edited">最近更新 {{ last_modified | date: df }}</time>
+          {% endif %}
+        </div>
         <!-- <p class="k-excerpt">
           {%- if post.excerpt -%}
             {{ post.excerpt | strip_html | strip_newlines | truncate: 180 }}

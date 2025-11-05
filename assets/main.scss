@@ -44,32 +44,45 @@ body{
 .k-main{padding: var(--spacing-lg) 0 var(--spacing-xl)}
 
 .k-list{display:block; margin-top: var(--spacing-sm)}
-.k-row{display:flex; gap: var(--spacing); padding: var(--spacing) 0; border-bottom: 1px solid var(--border)}
-.k-date{flex: 0 0 var(--date-col); color: var(--muted)}
-.k-maincol{flex: 1 1 auto}
-.k-title{font-size: 20px; margin: 0 0 6px; line-height: 1.35; display: flex; align-items: center; gap: 12px; flex-wrap: wrap}
-.k-title a{color: var(--link); text-decoration:none}
+.k-row{display:block; padding: 20px 0; border-bottom: 1px solid var(--border)}
+.k-row:last-child{border-bottom: none}
+.k-maincol{width: 100%}
+.k-title{font-size: 18px; margin: 0 0 6px; line-height: 1.4; display: flex; align-items: center; gap: 10px; flex-wrap: wrap}
+.k-title a{color: var(--link); text-decoration:none; font-weight: 500; letter-spacing: -0.01em}
 .k-title a:hover{text-decoration: underline}
+.k-meta{display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); margin-top: 4px}
+.k-meta-date{color: var(--muted)}
+.k-meta-sep{color: var(--muted); opacity: 0.5}
+.k-meta-edited{color: var(--muted); opacity: 0.7}
 .k-excerpt{margin:0; color:#444}
 
-.k-post .k-post-title{font-size: 28px; margin: 10px 0 6px; line-height: 1.25; letter-spacing: -0.01em}
-.k-post .k-post-meta{color: var(--muted); margin: 0 0 14px}
+.k-post .k-post-title{font-size: 28px; margin: 10px 0 8px; line-height: 1.25; letter-spacing: -0.01em}
+.k-post .k-post-meta{color: var(--muted); margin: 0 0 20px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 14px}
+.k-post .k-post-date{display: inline-block}
+.k-post .k-post-sep{color: var(--muted); opacity: 0.5}
+.k-post .k-post-edit-date{display: inline-block; opacity: 0.7}
 .k-post .k-post-body{font-size: 17px}
 
 /* 标签样式 */
-.k-tags{display: inline-flex; flex-wrap: wrap; gap: 8px; margin: 0}
+.k-tags{display: inline-flex; flex-wrap: wrap; gap: 6px; margin: 0}
 .k-tag{
   display: inline-block;
-  padding: 4px 8px;
-  background: #f3f4f6;
+  padding: 2px 6px;
+  background: transparent;
   color: var(--muted);
-  font-size: 13px;
-  border-radius: 4px;
+  font-size: 12px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
   text-decoration: none;
   transition: all 0.2s ease;
   cursor: pointer;
+  font-weight: 400;
 }
-.k-tag:hover{background: var(--link); color: white}
+.k-tag:hover{
+  border-color: var(--link);
+  color: var(--link);
+  background: transparent;
+}
 
 /* 小标签样式 */
 .k-tag-small{
@@ -230,8 +243,7 @@ body{
     --spacing-lg: clamp(18px, 3vw, 30px);
     --spacing-xl: clamp(24px, 4vw, 40px);
   }
-  .k-row{flex-direction: column; gap: 6px}
-  .k-date{order: 0}
+  .k-meta{font-size: 12px}
   .k-tags{justify-content: flex-start}
   .k-tags-list{gap: var(--spacing-sm)}
   
