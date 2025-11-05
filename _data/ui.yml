@@ -12,17 +12,3 @@ nav:
 
 comments:
   enabled: false
-
-# comments:
-#   enabled: true
-#   provider: "giscus"
-#   repo: "zhazhuanling12/blog_comments"
-#   repo_id: "R_kgDOxxxxxx"        # 从 giscus.app 复制
-#   category: "General"
-#   category_id: "DIC_kwDOxxxxxx4CSD"
-#   mapping: "pathname"
-#   reactions_enabled: "1"
-#   emit_metadata: "0"
-#   input_position: "top"
-#   theme: "preferred_color_scheme"
-#   lang: "zh-CN"
