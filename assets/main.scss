@@ -44,8 +44,9 @@ body{
 .k-main{padding: var(--spacing-lg) 0 var(--spacing-xl)}
 
 .k-list{display:block; margin-top: var(--spacing-sm)}
-.k-row{display:block; padding: 20px 0; border-bottom: 1px solid var(--border)}
-.k-row:last-child{border-bottom: none}
+.k-row{display:block; padding: 24px 0; margin: 0; border-bottom: 1px solid var(--border)}
+.k-row:first-child{padding-top: 24px}
+.k-row:last-child{border-bottom: none; padding-bottom: 24px}
 .k-maincol{width: 100%}
 .k-title{font-size: 18px; margin: 0 0 6px; line-height: 1.4; display: flex; align-items: center; gap: 10px; flex-wrap: wrap}
 .k-title a{color: var(--link); text-decoration:none; font-weight: 500; letter-spacing: -0.01em}
